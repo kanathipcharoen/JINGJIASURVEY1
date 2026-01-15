@@ -158,7 +158,7 @@ const Portfolio = () => {
       id: 1,
       title: "วางผังอาคารคุมจ่าย ปั้มน้ำมัน PT",
       description: "งานวางผังอาคารคุมจ่าย ตรวจสอบพิกัดและระยะตามแบบวิศวกรรมอย่างละเอียด",
-      image: "https://img5.pic.in.th/file/secure-sv1/7e70705f5f926051e2b0546c1a4b0faf.png",
+      image: "https://img2.pic.in.th/f29a7128e25a4ee2ce6002212036c088.png",
       gallery: [
         "https://img5.pic.in.th/file/secure-sv1/LINE_ALBUM_7468_250407_26.jpg",
         "https://img5.pic.in.th/file/secure-sv1/LINE_ALBUM_7468_250407_16f83e3e43ae2602c5.jpg",
@@ -167,16 +167,22 @@ const Portfolio = () => {
     },
     {
       id: 5,
-      title: "ติดตามความคืบหน้างานก่อสร้าง",
-      description: "บริการโดรนสำรวจติดตามความคืบหน้าโครงการรายสัปดาห์ (Construction Monitoring)",
-      image: "https://www.example.com/construction_monitoring.mp4",
-      isVideo: true
+      title: "แผนที่ TOPOGRAPHIC MAP",
+      description: "'งานสำรวจภูมิประเทศ เก็บรายละเอียดเส้นชั้นความสูงสร้างแผนที่รายละเอียดสูง",
+      image: "https://img5.pic.in.th/file/secure-sv1/188a8745800cba98c.png",
+      gallery: ["https://img5.pic.in.th/file/secure-sv1/-15ea16487f161f176.png"
+      ]
     },
     {
       id: 2,
       title: "งานสำรวจรายเดือน",
       description: "โครงการก่อสร้างโรงแยกก๊าซธรรมชาติหน่วยที่ 7",
       image: "https://img5.pic.in.th/file/secure-sv1/IMG_8461f53facef34b03de8.jpg"
+    gallery: [
+      "https://img5.pic.in.th/file/secure-sv1/IMG_7435555.png"
+      "https://img2.pic.in.th/IMG_7372-1.png"
+      "https://img2.pic.in.th/IMG_775056.png"
+    ]
     },
     {
       id: 3,
