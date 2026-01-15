@@ -160,9 +160,9 @@ const Portfolio = () => {
       description: "งานวางผังอาคารคุมจ่าย ตรวจสอบพิกัดและระยะตามแบบวิศวกรรมอย่างละเอียด",
       image: "https://img5.pic.in.th/file/secure-sv1/7e70705f5f926051e2b0546c1a4b0faf.png",
       gallery: [
-        "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=400",
-        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=400",
-        "https://images.unsplash.com/photo-1581094128542-a76d3a50d446?auto=format&fit=crop&q=80&w=400"
+        "https://img5.pic.in.th/file/secure-sv1/LINE_ALBUM_7468_250407_26.jpg",
+        "https://img5.pic.in.th/file/secure-sv1/LINE_ALBUM_7468_250407_16f83e3e43ae2602c5.jpg",
+        "https://img5.pic.in.th/file/secure-sv1/LINE_ALBUM_7468_250407_5.jpg"
       ]
     },
     {
@@ -174,9 +174,9 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      title: "งานสำรวจทางหลวง",
-      description: "งานระดับและทำแผนที่ตัดขวางแนวถนนความยาว 5 กม.",
-      image: "https://images.unsplash.com/photo-1590486803833-ffc9171e6bc9?auto=format&fit=crop&q=80&w=600"
+      title: "งานสำรวจรายเดือน",
+      description: "โครงการก่อสร้างโรงแยกก๊าซธรรมชาติหน่วยที่ 7",
+      image: "https://img5.pic.in.th/file/secure-sv1/IMG_8461f53facef34b03de8.jpg"
     },
     {
       id: 3,
