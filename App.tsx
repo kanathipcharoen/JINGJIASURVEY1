@@ -15,6 +15,7 @@ interface Service {
   title: string;
   icon: string;
   description: string;
+  longDescription: string[];
 }
 
 interface FormErrors {
@@ -106,44 +107,103 @@ const Hero = () => (
 );
 
 const Services = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   const services: Service[] = [
     {
       title: "งานวางผังเสาเข็ม",
       icon: "fa-hard-hat",
-      description: "ตรวจสอบแนวเขตและวางตำแหน่งเสาเข็มตามแบบแปลนด้วยกล้อง Total Station ที่มีความแม่นยำสูง"
+      description: "ตรวจสอบแนวเขตและวางตำแหน่งเสาเข็มตามแบบแปลนด้วยกล้อง Total Station",
+      longDescription: [
+        "ตรวจสอบตำแหน่งพิกัดแนวเขตที่ดิน (Boundary Survey)",
+        "วางผังตำแหน่งเสาเข็ม (Piling Layout) พร้อมตรวจสอบระยะ Offset",
+        "จัดทำรายงานการตรวจสอบตำแหน่ง (As-built Piling)",
+        "งานวางผังฐานรากและเสาตอม่อ (Foundation Layout)"
+      ]
     },
     {
       title: "แผนที่ภูมิประเทศ",
       icon: "fa-map-marked-alt",
-      description: "จัดทำ Topographic Map สำหรับงานออกแบบวิศวกรรม พร้อมระดับความสูงและรายละเอียดทางกายภาพ"
+      description: "จัดทำ Topographic Map สำหรับงานออกแบบวิศวกรรม พร้อมระดับความสูง",
+      longDescription: [
+        "จัดทำแผนที่เส้นชั้นความสูง (Contour Map)",
+        "สำรวจรายละเอียดทางกายภาพ เช่น ถนน อาคาร ต้นไม้ และเสาไฟฟ้า",
+        "คำนวณปริมาณงานดินตัด-ดินถม (Earthwork Calculation)",
+        "จัดทำแผนที่ในรูปแบบไฟล์ CAD (.dwg) และ PDF"
+      ]
     },
     {
       title: "งานสำรวจเพื่อการก่อสร้าง",
       icon: "fa-drafting-compass",
-      description: "งานระดับ งานเช็คแนวดิ่ง และงานสำรวจที่เกี่ยวข้องกับการควบคุมงานก่อสร้างอาคารและโครงสร้าง"
+      description: "งานระดับ งานเช็คแนวดิ่ง และงานสำรวจควบคุมงานก่อสร้างทุกประเภท",
+      longDescription: [
+        "ถ่ายระดับ (Leveling) เพื่อกำหนดจุดอ้างอิงความสูง (BM)",
+        "ตรวจสอบแนวดิ่งของโครงสร้างอาคาร (Vertical Check)",
+        "งานวางตำแหน่งโครงสร้างเหล็กและเครื่องจักร (Precision Alignment)",
+        "ตรวจสอบความคลาดเคลื่อนของงานก่อสร้าง (As-built Survey)"
+      ]
     },
     {
       title: "ให้คำปรึกษางานสำรวจ",
       icon: "fa-users-cog",
-      description: "ให้คำปรึกษาและวางแผนงานสำรวจโดยวิศวกรและช่างสำรวจผู้เชี่ยวชาญ เพื่อลดความผิดพลาดในงาน"
+      description: "วางแผนงานสำรวจโดยวิศวกรและช่างสำรวจผู้เชี่ยวชาญ",
+      longDescription: [
+        "วิเคราะห์แบบแปลนก่อนเริ่มงานเพื่อลดความผิดพลาด",
+        "ให้คำแนะนำการเลือกใช้อุปกรณ์สำรวจที่เหมาะสม",
+        "ตรวจสอบและควบคุมมาตรฐานงานสำรวจในโครงการ",
+        "จัดเตรียมข้อมูลพิกัดสำหรับระบบ GPS (GNSS Survey)"
+      ]
     }
   ];
 
   return (
-    <section id="services" className="py-20 bg-white">
+    <section id="services" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">บริการของเรา</h2>
-          <div className="w-20 h-1 bg-accent mx-auto"></div>
+          <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
+          <p className="text-gray-600">เลือกบริการที่สนใจเพื่อดูรายละเอียดเพิ่มเติม</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, idx) => (
-            <div key={idx} className="bg-gray-50 p-8 rounded-2xl border-b-4 border-transparent hover:border-accent hover:shadow-2xl transition-all group">
-              <div className="text-accent text-4xl mb-6 group-hover:scale-110 transition-transform">
+            <div 
+              key={idx} 
+              onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
+              className={`cursor-pointer p-8 rounded-2xl border-b-4 transition-all duration-300 transform ${
+                activeIndex === idx 
+                  ? 'border-accent shadow-2xl scale-105 bg-navy text-white' 
+                  : 'border-transparent bg-white shadow-md hover:border-accent hover:shadow-xl hover:-translate-y-1'
+              }`}
+            >
+              <div className="text-4xl mb-6 text-accent transition-transform group-hover:scale-110">
                 <i className={`fa-solid ${service.icon}`}></i>
               </div>
-              <h3 className="text-xl font-bold text-navy mb-3">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              <h3 className={`text-xl font-bold mb-3 ${activeIndex === idx ? 'text-white' : 'text-navy'}`}>
+                {service.title}
+              </h3>
+              <p className={`text-sm leading-relaxed mb-4 ${activeIndex === idx ? 'text-gray-300' : 'text-gray-600'}`}>
+                {service.description}
+              </p>
+              
+              <div 
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  activeIndex === idx ? 'max-height-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <ul className="space-y-3 text-sm border-t border-gray-700 pt-6">
+                  {service.longDescription.map((item, i) => (
+                    <li key={i} className="flex items-start space-x-2">
+                      <i className="fa-solid fa-check-circle text-accent mt-1 flex-shrink-0"></i>
+                      <span className={activeIndex === idx ? 'text-gray-200' : 'text-gray-600'}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={`mt-6 text-xs font-bold flex items-center tracking-wider uppercase ${activeIndex === idx ? 'text-accent' : 'text-navy opacity-70'}`}>
+                {activeIndex === idx ? 'ปิดรายละเอียด' : 'อ่านรายละเอียดเพิ่มเติม'}
+                <i className={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 ${activeIndex === idx ? 'rotate-180' : ''}`}></i>
+              </div>
             </div>
           ))}
         </div>
@@ -168,34 +228,35 @@ const Portfolio = () => {
     {
       id: 5,
       title: "แผนที่ TOPOGRAPHIC MAP",
-      description: "'งานสำรวจภูมิประเทศ เก็บรายละเอียดเส้นชั้นความสูงสร้างแผนที่รายละเอียดสูง",
+      description: "งานสำรวจภูมิประเทศ เก็บรายละเอียดเส้นชั้นความสูงสร้างแผนที่รายละเอียดสูง",
       image: "https://img5.pic.in.th/file/secure-sv1/188a8745800cba98c.png",
-      gallery: ["https://img5.pic.in.th/file/secure-sv1/-15ea16487f161f176.png"
-      "https://img5.pic.in.th/file/secure-sv1/237d8197f5f3fe8e4.png"
-      "https://img5.pic.in.th/file/secure-sv1/3891d99cdfa1f60cd.png"
-    ]
+      gallery: [
+        "https://img5.pic.in.th/file/secure-sv1/-15ea16487f161f176.png",
+        "https://img5.pic.in.th/file/secure-sv1/237d8197f5f3fe8e4.png",
+        "https://img5.pic.in.th/file/secure-sv1/3891d99cdfa1f60cd.png"
+      ]
     },
     {
       id: 2,
       title: "งานสำรวจรายเดือน",
       description: "โครงการก่อสร้างโรงแยกก๊าซธรรมชาติหน่วยที่ 7",
-      image: "https://img5.pic.in.th/file/secure-sv1/IMG_8461f53facef34b03de8.jpg"
-    gallery: [
-      "https://img5.pic.in.th/file/secure-sv1/IMG_7435555.png"
-      "https://img2.pic.in.th/IMG_7372-1.png"
-      "https://img2.pic.in.th/IMG_775056.png"
-    ]
+      image: "https://img5.pic.in.th/file/secure-sv1/IMG_8461f53facef34b03de8.jpg",
+      gallery: [
+        "https://img5.pic.in.th/file/secure-sv1/IMG_7435555.png",
+        "https://img2.pic.in.th/IMG_7372-1.png",
+        "https://img2.pic.in.th/IMG_775056.png"
+      ]
     },
     {
       id: 3,
       title: "วางตำแหน่งเสาเข็ม อาคารหอพักอาศัย 3 ชั้น รามคำแหง 53",
-      description: "งานวางศูนย์กลางเครื่องจักรและความเที่ยงตรงสูง",
-      image: "https://images.unsplash.com/photo-1581094128542-a76d3a50d446?auto=format&fit=crop&q=80&w=600"
+      description: "งานวางตำแหน่งเสาเข็มและแนวแกนอาคารด้วยความแม่นยำสูง",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=600"
     },
     {
       id: 4,
-      title: "อาคารสูง 20 ชั้น",
-      description: "งานถ่ายดิ่งและวางผังโครงสร้างอาคารพาณิชย์",
+      title: "สำรวจพื้นที่โครงการอาคารพาณิชย์",
+      description: "งานถ่ายดิ่งและวางผังโครงสร้างอาคารเพื่อการควบคุมงานก่อสร้าง",
       image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=600"
     }
   ];
@@ -209,7 +270,10 @@ const Portfolio = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div key={project.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all flex flex-col group">
+            <div 
+              key={project.id} 
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2 hover:scale-[1.02] flex flex-col group"
+            >
               <div className="h-64 overflow-hidden bg-gray-200 relative">
                 {project.isVideo ? (
                   <video 
@@ -225,7 +289,7 @@ const Portfolio = () => {
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover cursor-zoom-in group-hover:scale-105 transition-transform duration-500" 
+                    className="w-full h-full object-cover cursor-zoom-in group-hover:scale-110 transition-transform duration-700 ease-in-out" 
                     onClick={() => window.open(project.image, '_blank')} 
                   />
                 )}
@@ -239,7 +303,7 @@ const Portfolio = () => {
               </div>
               
               <div className="p-8 flex-grow">
-                <h3 className="font-bold text-xl text-navy mb-3 group-hover:text-accent transition-colors">{project.title}</h3>
+                <h3 className="font-bold text-xl text-navy mb-3 group-hover:text-accent transition-colors duration-300">{project.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">{project.description}</p>
                 
                 {/* Gallery Implementation */}
@@ -250,13 +314,13 @@ const Portfolio = () => {
                       {project.gallery.map((img, idx) => (
                         <div 
                           key={idx} 
-                          className="h-20 rounded-lg overflow-hidden border border-gray-200 shadow-sm cursor-pointer hover:border-accent hover:shadow-md transition-all group/thumb"
+                          className="h-20 rounded-lg overflow-hidden border border-gray-200 shadow-sm cursor-pointer hover:border-accent hover:shadow-md transition-all duration-300 group/thumb transform hover:scale-105"
                           onClick={() => window.open(img, '_blank')}
                         >
                           <img 
                             src={img} 
                             alt={`${project.title} detail ${idx + 1}`} 
-                            className="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform"
+                            className="w-full h-full object-cover group-hover/thumb:brightness-110 transition-all"
                           />
                         </div>
                       ))}
