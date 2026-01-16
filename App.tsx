@@ -116,9 +116,9 @@ const Services = () => {
       description: "ตรวจสอบแนวเขตและวางตำแหน่งเสาเข็มตามแบบแปลนด้วยกล้อง Total Station",
       longDescription: [
         "ตรวจสอบตำแหน่งพิกัดแนวเขตที่ดิน (Boundary Survey)",
+        "จัดทำแผนวางตำแหน่งเสาเข็มแล้วขออนุมัติผู้ว่าจ้างวางพิกัดที่คอนเฟิร์ม"
         "วางผังตำแหน่งเสาเข็ม (Piling Layout) พร้อมตรวจสอบระยะ Offset",
         "จัดทำรายงานการตรวจสอบตำแหน่ง (As-built Piling)",
-        "งานวางผังฐานรากและเสาตอม่อ (Foundation Layout)"
       ]
     },
     {
@@ -229,7 +229,7 @@ const Portfolio = () => {
       id: 5,
       title: "แผนที่ TOPOGRAPHIC MAP",
       description: "งานสำรวจภูมิประเทศ เก็บรายละเอียดเส้นชั้นความสูงสร้างแผนที่รายละเอียดสูง",
-      image: "https://img5.pic.in.th/file/secure-sv1/188a8745800cba98c.png",
+      image: "https://img5.pic.in.th/file/secure-sv1/63551328ece50d98a0df.png",
       gallery: [
         "https://img5.pic.in.th/file/secure-sv1/-15ea16487f161f176.png",
         "https://img5.pic.in.th/file/secure-sv1/237d8197f5f3fe8e4.png",
@@ -250,8 +250,11 @@ const Portfolio = () => {
     {
       id: 3,
       title: "วางตำแหน่งเสาเข็ม อาคารหอพักอาศัย 3 ชั้น รามคำแหง 53",
-      description: "งานวางตำแหน่งเสาเข็มและแนวแกนอาคารด้วยความแม่นยำสูง",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=600"
+      description: "งานวางตำแหน่งเสาเข็ม และ ตำแหน่ง Grid Line พร้อมให้ระดับ off 1 m.",
+      image: "https://img5.pic.in.th/file/secure-sv1/IMG_8163-1.png"
+      gallery:["https://img2.pic.in.th/IMG_3564-1325ced3e18eb3e23.png",
+      "https://img2.pic.in.th/IMG_3628-1.png",
+      ]
     },
     {
       id: 4,
@@ -528,9 +531,9 @@ const Footer = () => (
           <div className="flex items-start space-x-3">
             <i className="fa-solid fa-location-dot text-accent mt-1"></i>
             <p className="text-gray-400">
-              เลขที่ 123/45 หมู่บ้านโครงการสำรวจวิศวกรรม<br/>
-              ตำบลบางกรวย อำเภอบางกรวย<br/>
-              จังหวัดนนทบุรี 11130
+              เลขที่ 160/18 ถนน พายัพทิศ 4 <br/>
+              ตำบลในเมือง อำเภอเมืองนนคราชสีมา<br/>
+              จังหวัดนครราชสีมา 30000
             </p>
           </div>
           <div className="mt-4 pt-4 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-2">
