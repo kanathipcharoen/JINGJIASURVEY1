@@ -171,7 +171,9 @@ const Portfolio = () => {
       description: "'งานสำรวจภูมิประเทศ เก็บรายละเอียดเส้นชั้นความสูงสร้างแผนที่รายละเอียดสูง",
       image: "https://img5.pic.in.th/file/secure-sv1/188a8745800cba98c.png",
       gallery: ["https://img5.pic.in.th/file/secure-sv1/-15ea16487f161f176.png"
-      ]
+      "https://img5.pic.in.th/file/secure-sv1/237d8197f5f3fe8e4.png"
+      "https://img5.pic.in.th/file/secure-sv1/3891d99cdfa1f60cd.png"
+    ]
     },
     {
       id: 2,
@@ -186,7 +188,7 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      title: "โรงงานอุตสาหกรรม",
+      title: "วางตำแหน่งเสาเข็ม อาคารหอพักอาศัย 3 ชั้น รามคำแหง 53",
       description: "งานวางศูนย์กลางเครื่องจักรและความเที่ยงตรงสูง",
       image: "https://images.unsplash.com/photo-1581094128542-a76d3a50d446?auto=format&fit=crop&q=80&w=600"
     },
