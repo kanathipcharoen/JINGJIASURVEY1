@@ -254,13 +254,17 @@ const Portfolio = () => {
       image: "https://img5.pic.in.th/file/secure-sv1/IMG_8163-1.png"
       gallery:["https://img2.pic.in.th/IMG_3564-1325ced3e18eb3e23.png",
       "https://img2.pic.in.th/IMG_3628-1.png",
+      "https://s.imgz.io/2026/01/17/IMG_3577-16c07afac51610935.png",
       ]
     },
     {
       id: 4,
       title: "สำรวจพื้นที่โครงการอาคารพาณิชย์",
       description: "งานถ่ายดิ่งและวางผังโครงสร้างอาคารเพื่อการควบคุมงานก่อสร้าง",
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=600"
+      image: "https://img5.pic.in.th/file/secure-sv1/-1---Model_recover-Layout1.jpg",
+      gallery:["https://img5.pic.in.th/file/secure-sv1/IMG_2495.png",
+      "https://img2.pic.in.th/IMG_2492-1.png",
+      "https://img2.pic.in.th/IMG_2483.png",]
     }
   ];
 
