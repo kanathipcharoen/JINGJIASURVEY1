@@ -27,6 +27,15 @@
         .animate-pulse-slow {
           animation: pulse-slow 3s infinite ease-in-out;
         }
+
+        /* Unified Bounce Animation for all elements */
+        @keyframes bounce-sync {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-sync {
+          animation: bounce-sync 2s infinite ease-in-out;
+        }
     </style>
 <script type="importmap">
 {

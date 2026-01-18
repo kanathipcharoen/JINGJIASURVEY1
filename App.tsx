@@ -21,6 +21,7 @@ interface Service {
 interface FormErrors {
   name?: string;
   phone?: string;
+  email?: string;
   service?: string;
   details?: string;
 }
@@ -49,6 +50,7 @@ const Navbar = () => {
             <button 
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-accent focus:outline-none"
+              aria-label="Toggle Menu"
             >
               <i className={`fa-solid ${isOpen ? 'fa-xmark' : 'fa-bars'} text-2xl`}></i>
             </button>
@@ -60,10 +62,10 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-navy border-t border-gray-700">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#services" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md">บริการของเรา</a>
-            <a href="#portfolio" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md">ผลงาน</a>
-            <a href="#quotation" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md">ขอใบเสนอราคา</a>
-            <a href="#contact" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md">ติดต่อเรา</a>
+            <a href="#services" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">บริการของเรา</a>
+            <a href="#portfolio" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ผลงาน</a>
+            <a href="#quotation" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ขอใบเสนอราคา</a>
+            <a href="#contact" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ติดต่อเรา</a>
           </div>
         </div>
       )}
@@ -90,14 +92,16 @@ const Hero = () => (
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4">
         <a 
-          href="#quotation" 
-          className="bg-accent text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-yellow-500 transition-all transform hover:scale-105 shadow-xl"
+          href="https://line.me/ti/p/~kanathipcharoen" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-accent text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-yellow-500 transition-all transform hover:scale-105 shadow-xl flex items-center justify-center"
         >
-          ปรึกษาฟรี
+          <i className="fa-brands fa-line text-2xl mr-2"></i> ปรึกษาฟรี (LINE)
         </a>
         <a 
           href="tel:0820025124" 
-          className="bg-white text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-gray-100 transition-all border-2 border-transparent"
+          className="bg-white text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-gray-100 transition-all border-2 border-transparent flex items-center justify-center shadow-lg"
         >
           <i className="fa-solid fa-phone mr-2"></i> 082-002-5124
         </a>
@@ -116,20 +120,21 @@ const Services = () => {
       description: "ตรวจสอบแนวเขตและวางตำแหน่งเสาเข็มตามแบบแปลนด้วยกล้อง Total Station",
       longDescription: [
         "ตรวจสอบตำแหน่งพิกัดแนวเขตที่ดิน (Boundary Survey)",
-        "จัดทำแผนวางตำแหน่งเสาเข็มแล้วขออนุมัติผู้ว่าจ้างวางพิกัดที่คอนเฟิร์ม"
+        "จัดทำแผนวางตำแหน่งเสาเข็มแล้วขออนุมัติผู้ว่าจ้างวางพิกัดที่คอนเฟิร์ม",
         "วางผังตำแหน่งเสาเข็ม (Piling Layout) พร้อมตรวจสอบระยะ Offset",
         "จัดทำรายงานการตรวจสอบตำแหน่ง (As-built Piling)",
+        "เก็บค่า (Pile Deviation) หลังตอกเข็มแล้วเสร็จจัดทำ (Report) รายงานผู้รับจ้าง",
       ]
     },
     {
       title: "แผนที่ภูมิประเทศ",
       icon: "fa-map-marked-alt",
-      description: "จัดทำ Topographic Map สำหรับงานออกแบบวิศวกรรม พร้อมระดับความสูง",
+      description: "จัดทำ Topographic Map สำหรับงานออกแบบวิศวกรรม พร้อมเขียนแบบ 3D สามารถนำไปทำงานต่อ ใน Sketch up ได้ทันที",
       longDescription: [
         "จัดทำแผนที่เส้นชั้นความสูง (Contour Map)",
         "สำรวจรายละเอียดทางกายภาพ เช่น ถนน อาคาร ต้นไม้ และเสาไฟฟ้า",
         "คำนวณปริมาณงานดินตัด-ดินถม (Earthwork Calculation)",
-        "จัดทำแผนที่ในรูปแบบไฟล์ CAD (.dwg) และ PDF"
+        "จัดทำแผนที่ในรูปแบบไฟล์ CAD (.dwg) , PDF , SketcUp (skp)",
       ]
     },
     {
@@ -137,10 +142,10 @@ const Services = () => {
       icon: "fa-drafting-compass",
       description: "งานระดับ งานเช็คแนวดิ่ง และงานสำรวจควบคุมงานก่อสร้างทุกประเภท",
       longDescription: [
-        "ถ่ายระดับ (Leveling) เพื่อกำหนดจุดอ้างอิงความสูง (BM)",
-        "ตรวจสอบแนวดิ่งของโครงสร้างอาคาร (Vertical Check)",
-        "งานวางตำแหน่งโครงสร้างเหล็กและเครื่องจักร (Precision Alignment)",
-        "ตรวจสอบความคลาดเคลื่อนของงานก่อสร้าง (As-built Survey)"
+        "การสำรวจเพื่อทำแผนที่ภูมิประเทศ (Topographic Survey)",
+        "การสร้างหมุดควบคุม (Establishing Control Network)",
+        "การวางผังและกำหนดตำแหน่ง (Setting Out/Staking Out)",
+        "การสำรวจตรวจสอบและทำแบบจริง (Monitoring & As-built Survey)"
       ]
     },
     {
@@ -175,32 +180,32 @@ const Services = () => {
                   : 'border-transparent bg-white shadow-md hover:border-accent hover:shadow-xl hover:-translate-y-1'
               }`}
             >
-              <div className="text-4xl mb-6 text-accent transition-transform group-hover:scale-110">
+              <div className="text-4xl mb-6 text-accent">
                 <i className={`fa-solid ${service.icon}`}></i>
               </div>
               <h3 className={`text-xl font-bold mb-3 ${activeIndex === idx ? 'text-white' : 'text-navy'}`}>
                 {service.title}
               </h3>
-              <p className={`text-sm leading-relaxed mb-4 ${activeIndex === idx ? 'text-gray-300' : 'text-gray-600'}`}>
+              <p className={`text-sm leading-relaxed mb-4 ${activeIndex === idx ? 'text-gray-100' : 'text-gray-800'}`}>
                 {service.description}
               </p>
               
               <div 
                 className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  activeIndex === idx ? 'max-height-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+                  activeIndex === idx ? 'max-h-[500px] opacity-100 mt-4' : 'max-h-0 opacity-0'
                 }`}
               >
                 <ul className="space-y-3 text-sm border-t border-gray-700 pt-6">
                   {service.longDescription.map((item, i) => (
                     <li key={i} className="flex items-start space-x-2">
                       <i className="fa-solid fa-check-circle text-accent mt-1 flex-shrink-0"></i>
-                      <span className={activeIndex === idx ? 'text-gray-200' : 'text-gray-600'}>{item}</span>
+                      <span className={activeIndex === idx ? 'text-gray-100' : 'text-gray-800'}>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className={`mt-6 text-xs font-bold flex items-center tracking-wider uppercase ${activeIndex === idx ? 'text-accent' : 'text-navy opacity-70'}`}>
+              <div className={`mt-6 text-xs font-bold flex items-center tracking-wider uppercase ${activeIndex === idx ? 'text-accent' : 'text-navy opacity-80'}`}>
                 {activeIndex === idx ? 'ปิดรายละเอียด' : 'อ่านรายละเอียดเพิ่มเติม'}
                 <i className={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 ${activeIndex === idx ? 'rotate-180' : ''}`}></i>
               </div>
@@ -249,22 +254,25 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      title: "วางตำแหน่งเสาเข็ม อาคารหอพักอาศัย 3 ชั้น รามคำแหง 53",
-      description: "งานวางตำแหน่งเสาเข็ม และ ตำแหน่ง Grid Line พร้อมให้ระดับ off 1 m.",
-      image: "https://img5.pic.in.th/file/secure-sv1/IMG_8163-1.png"
-      gallery:["https://img2.pic.in.th/IMG_3564-1325ced3e18eb3e23.png",
-      "https://img2.pic.in.th/IMG_3628-1.png",
-      "https://s.imgz.io/2026/01/17/IMG_3577-16c07afac51610935.png",
+      title: "วางตำแหน่งเสาเข็ม หอพัก 3 ชั้น",
+      description: "งานวางตำแหน่งเสาเข็ม และ ตำแหน่ง Grid Line พร้อมให้ระดับ off 1 m. รามคำแหง 53",
+      image: "https://img5.pic.in.th/file/secure-sv1/IMG_8163-1.png",
+      gallery:[
+        "https://img2.pic.in.th/IMG_3564-1325ced3e18eb3e23.png",
+        "https://img2.pic.in.th/IMG_3628-1.png",
+        "https://s.imgz.io/2026/01/17/IMG_3577-16c07afac51610935.png",
       ]
     },
     {
       id: 4,
-      title: "สำรวจพื้นที่โครงการอาคารพาณิชย์",
-      description: "งานถ่ายดิ่งและวางผังโครงสร้างอาคารเพื่อการควบคุมงานก่อสร้าง",
+      title: "วางผังอาคารบ้านพักอาศัย ซอย เอกอุดร 1 เมือง อำเภอเมืองปทุมธานี จังหวัดปทุมธานี",
+      description: "ทำหมุดควบคุมพร้อมครอบผังบริเวณบ้านพักอาศัยแล้ววางตำแหน่งเสาเข็ม",
       image: "https://img5.pic.in.th/file/secure-sv1/-1---Model_recover-Layout1.jpg",
-      gallery:["https://img5.pic.in.th/file/secure-sv1/IMG_2495.png",
-      "https://img2.pic.in.th/IMG_2492-1.png",
-      "https://img2.pic.in.th/IMG_2483.png",]
+      gallery:[
+        "https://img5.pic.in.th/file/secure-sv1/IMG_2495.png",
+        "https://img2.pic.in.th/IMG_2492-1.png",
+        "https://img2.pic.in.th/IMG_2483.png",
+      ]
     }
   ];
 
@@ -279,56 +287,34 @@ const Portfolio = () => {
           {projects.map((project) => (
             <div 
               key={project.id} 
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2 hover:scale-[1.02] flex flex-col group"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2 flex flex-col group"
             >
               <div className="h-64 overflow-hidden bg-gray-200 relative">
-                {project.isVideo ? (
-                  <video 
-                    className="w-full h-full object-cover" 
-                    controls 
-                    muted 
-                    loop
-                  >
-                    <source src={project.image} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover cursor-zoom-in group-hover:scale-110 transition-transform duration-700 ease-in-out" 
-                    onClick={() => window.open(project.image, '_blank')} 
-                  />
-                )}
-                <div className="absolute top-4 right-4 flex gap-2">
-                  {project.isVideo ? (
-                    <span className="bg-accent text-navy px-3 py-1 rounded-full text-xs font-bold shadow-md uppercase">Video</span>
-                  ) : (
-                    <span className="bg-navy bg-opacity-70 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">Photo</span>
-                  )}
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover cursor-pointer group-hover:scale-110 transition-transform duration-700" 
+                  onClick={() => window.open(project.image, '_blank')} 
+                />
+                <div className="absolute top-4 right-4">
+                  <span className="bg-navy bg-opacity-70 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">Gallery</span>
                 </div>
               </div>
               
               <div className="p-8 flex-grow">
-                <h3 className="font-bold text-xl text-navy mb-3 group-hover:text-accent transition-colors duration-300">{project.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">{project.description}</p>
+                <h3 className="font-bold text-xl text-navy mb-3">{project.title}</h3>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{project.description}</p>
                 
-                {/* Gallery Implementation */}
                 {project.gallery && project.gallery.length > 0 && (
                   <div className="mt-4 border-t pt-4">
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">รายละเอียดเพิ่มเติม</p>
                     <div className="grid grid-cols-3 gap-2">
                       {project.gallery.map((img, idx) => (
                         <div 
                           key={idx} 
-                          className="h-20 rounded-lg overflow-hidden border border-gray-200 shadow-sm cursor-pointer hover:border-accent hover:shadow-md transition-all duration-300 group/thumb transform hover:scale-105"
+                          className="h-20 rounded-lg overflow-hidden border border-gray-100 cursor-pointer hover:border-accent transition-all"
                           onClick={() => window.open(img, '_blank')}
                         >
-                          <img 
-                            src={img} 
-                            alt={`${project.title} detail ${idx + 1}`} 
-                            className="w-full h-full object-cover group-hover/thumb:brightness-110 transition-all"
-                          />
+                          <img src={img} alt="Detail" className="w-full h-full object-cover" />
                         </div>
                       ))}
                     </div>
@@ -345,134 +331,120 @@ const Portfolio = () => {
 
 const QuotationForm = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    service: '',
-    details: ''
-  });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', service: '', details: '' });
   const [errors, setErrors] = useState<FormErrors>({});
 
-  const validate = (): boolean => {
+  const validate = () => {
     const newErrors: FormErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'กรุณากรอกชื่อผู้ติดต่อ';
-    else if (formData.name.trim().length < 2) newErrors.name = 'ชื่อต้องมีอย่างน้อย 2 ตัวอักษร';
-
-    const phoneRegex = /^0\d{8,9}$/;
-    if (!formData.phone.trim()) newErrors.phone = 'กรุณากรอกเบอร์โทรศัพท์';
-    else if (!phoneRegex.test(formData.phone.replace(/[- ]/g, ''))) newErrors.phone = 'รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง (เช่น 0812345678)';
-
-    if (!formData.service) newErrors.service = 'กรุณาเลือกประเภทงาน';
-    
-    if (!formData.details.trim()) newErrors.details = 'กรุณากรอกรายละเอียดงาน';
-    else if (formData.details.trim().length < 10) newErrors.details = 'กรุณาระบุรายละเอียดเพิ่มเติม (อย่างน้อย 10 ตัวอักษร)';
-
+    if (!formData.name) newErrors.name = 'กรุณากรอกชื่อ';
+    if (!formData.phone) newErrors.phone = 'กรุณากรอกเบอร์โทรศัพท์';
+    if (formData.email && !/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = 'รูปแบบอีเมลไม่ถูกต้อง';
+    }
+    if (!formData.service) newErrors.service = 'กรุณาเลือกบริการ';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
       setSubmitted(true);
-      setFormData({ name: '', phone: '', service: '', details: '' });
       setTimeout(() => setSubmitted(false), 5000);
     }
   };
+
+  const inputStyles = "w-full px-4 py-3 rounded-lg border border-gray-300 outline-none transition-all duration-300 focus:ring-2 focus:ring-accent focus:border-accent focus:scale-[1.01] focus:shadow-lg bg-white";
 
   return (
     <section id="quotation" className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-navy rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
-          <div className="md:w-1/3 bg-accent p-10 flex flex-col justify-center text-navy">
-            <h2 className="text-3xl font-bold mb-6">ประเมินราคา และขอคำปรึกษา</h2>
-            <p className="mb-8 font-medium">กรอกข้อมูลเพื่อให้ทีมงานติดต่อกลับเพื่อประเมินราคาเบื้องต้นได้ทันที</p>
+          <div className="md:w-1/3 bg-accent p-10 text-navy">
+            <h2 className="text-3xl font-bold mb-6">ขอใบเสนอราคา</h2>
+            <p className="mb-8 opacity-90 font-medium">กรอกข้อมูลเพื่อให้ทีมงานติดต่อกลับเพื่อประเมินราคาเบื้องต้น</p>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
-                <i className="fa-solid fa-clock text-xl"></i>
+                <i className="fa-solid fa-clock"></i>
                 <span>ตอบกลับภายใน 24 ชม.</span>
               </div>
               <div className="flex items-center space-x-3">
-                <i className="fa-solid fa-check-circle text-xl"></i>
-                <span>ที่ปรึกษาฟรี ไม่มีค่าใช้จ่าย</span>
+                <i className="fa-solid fa-phone"></i>
+                <a href="tel:0820025124" className="hover:underline">082-002-5124</a>
               </div>
             </div>
           </div>
           <div className="md:w-2/3 p-10 bg-white">
             {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-20">
-                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl">
-                  <i className="fa-solid fa-check"></i>
-                </div>
-                <h3 className="text-2xl font-bold text-navy">ได้รับข้อมูลแล้ว!</h3>
-                <p className="text-gray-600">ทีมงานจะรีบติดต่อกลับหาคุณโดยเร็วที่สุด</p>
+              <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
+                <i className="fa-solid fa-circle-check text-green-500 text-5xl"></i>
+                <h3 className="text-2xl font-bold text-navy">ได้รับข้อมูลแล้ว</h3>
+                <p className="text-gray-600">เราจะติดต่อกลับหาท่านโดยเร็วที่สุด</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
+                  <div className="md:col-span-2">
                     <label className="block text-sm font-semibold text-gray-700 mb-2">ชื่อผู้ติดต่อ</label>
                     <input 
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
                       type="text" 
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-accent'} focus:ring-2 focus:border-transparent outline-none transition-all`} 
+                      className={inputStyles} 
                       placeholder="ชื่อ-นามสกุล" 
+                      value={formData.name}
+                      onChange={e => setFormData({...formData, name: e.target.value})}
                     />
-                    {errors.name && <p className="text-red-500 text-xs mt-1 ml-1">{errors.name}</p>}
+                    {errors.name && <span className="text-red-500 text-xs mt-1 block">{errors.name}</span>}
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">เบอร์โทรศัพท์</label>
                     <input 
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
                       type="tel" 
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-accent'} focus:ring-2 focus:border-transparent outline-none transition-all`} 
+                      className={inputStyles} 
                       placeholder="08X-XXX-XXXX" 
+                      value={formData.phone}
+                      onChange={e => setFormData({...formData, phone: e.target.value})}
                     />
-                    {errors.phone && <p className="text-red-500 text-xs mt-1 ml-1">{errors.phone}</p>}
+                    {errors.phone && <span className="text-red-500 text-xs mt-1 block">{errors.phone}</span>}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">อีเมล (ถ้ามี)</label>
+                    <input 
+                      type="email" 
+                      className={inputStyles} 
+                      placeholder="example@email.com" 
+                      value={formData.email}
+                      onChange={e => setFormData({...formData, email: e.target.value})}
+                    />
+                    {errors.email && <span className="text-red-500 text-xs mt-1 block">{errors.email}</span>}
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">ประเภทงาน</label>
                   <select 
-                    name="service"
+                    className={inputStyles}
                     value={formData.service}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.service ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-accent'} focus:ring-2 focus:border-transparent outline-none appearance-none bg-white transition-all`}
+                    onChange={e => setFormData({...formData, service: e.target.value})}
                   >
                     <option value="">เลือกประเภทงาน</option>
                     <option value="piling">งานวางผังเสาเข็ม</option>
                     <option value="topography">งานทำแผนที่ภูมิประเทศ</option>
                     <option value="level">งานถ่ายระดับ</option>
-                    <option value="other">งานสำรวจประเภทอื่นๆ</option>
+                    <option value="other">อื่นๆ</option>
                   </select>
-                  {errors.service && <p className="text-red-500 text-xs mt-1 ml-1">{errors.service}</p>}
+                  {errors.service && <span className="text-red-500 text-xs mt-1 block">{errors.service}</span>}
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">รายละเอียด/ขนาดพื้นที่</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">รายละเอียดเพิ่มเติม</label>
                   <textarea 
-                    name="details"
+                    rows={3} 
+                    className={inputStyles} 
+                    placeholder="ขนาดพื้นที่, สถานที่ตั้งโครงการ..."
                     value={formData.details}
-                    onChange={handleChange}
-                    rows={4} 
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.details ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-accent'} focus:ring-2 focus:border-transparent outline-none transition-all`} 
-                    placeholder="ระบุรายละเอียดเพิ่มเติม เช่น ขนาดพื้นที่, สถานที่ตั้งโครงการ..."
+                    onChange={e => setFormData({...formData, details: e.target.value})}
                   ></textarea>
-                  {errors.details && <p className="text-red-500 text-xs mt-1 ml-1">{errors.details}</p>}
                 </div>
-                <button type="submit" className="w-full bg-navy text-white font-bold py-4 rounded-lg hover:bg-opacity-90 transition-all shadow-lg text-lg transform hover:-translate-y-1 active:translate-y-0">
-                  ขอใบเสนอราคา
+                <button type="submit" className="w-full bg-navy text-white font-bold py-4 rounded-lg hover:bg-opacity-90 transition-all shadow-lg text-lg transform hover:scale-[1.02] active:scale-[0.98]">
+                  ส่งข้อมูลขอใบเสนอราคา
                 </button>
               </form>
             )}
@@ -489,79 +461,74 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-gray-700 pb-12 mb-12">
         <div className="col-span-1">
           <h2 className="text-3xl font-bold text-accent mb-4">JINGJAI SURVEY</h2>
-          <p className="text-gray-400 mb-6 max-w-sm">
+          <p className="text-gray-400 mb-6">
             พันธมิตรที่ไว้วางใจได้ในงานสำรวจวิศวกรรม ด้วยอุปกรณ์ที่ทันสมัยและทีมงานคุณภาพ
           </p>
           <div className="flex space-x-4">
-            <a href="https://www.facebook.com/jingjaisurvey" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all hover:scale-110 active:scale-95">
-              <i className="fa-brands fa-facebook-f"></i>
+            <a 
+              href="https://www.facebook.com/jingjaisurvey" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all shadow-blue-500/20 shadow-lg"
+              title="เยี่ยมชม Facebook"
+            >
+              <i className="fa-brands fa-facebook-f text-lg"></i>
             </a>
-            <a href="https://line.me/ti/p/~kanathipcharoen" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-all hover:scale-110 active:scale-95">
+            <a 
+              href="https://line.me/ti/p/~kanathipcharoen" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-all shadow-green-500/20 shadow-lg"
+            >
               <i className="fa-brands fa-line text-lg"></i>
             </a>
           </div>
         </div>
         
         <div className="col-span-1">
-          <h3 className="text-xl font-bold mb-6">ช่องทางการติดต่อ</h3>
+          <h3 className="text-xl font-bold mb-6">ติดต่อเรา</h3>
           <ul className="space-y-4">
             <li className="flex items-start space-x-3 group">
-              <i className="fa-solid fa-phone text-accent mt-1 group-hover:rotate-12 transition-transform"></i>
+              <i className="fa-solid fa-phone text-accent mt-1"></i>
               <a href="tel:0820025124" className="text-xl font-semibold hover:text-accent transition-colors">082-002-5124</a>
             </li>
             <li className="flex items-start space-x-3 group">
-              <i className="fa-brands fa-facebook text-accent text-xl mt-1 group-hover:scale-125 transition-transform duration-300"></i>
-              <div>
-                <p className="text-sm text-gray-400">Facebook Page</p>
-                <a href="https://www.facebook.com/jingjaisurvey" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors">JINGJAI SURVEY</a>
-              </div>
-            </li>
-            <li className="flex items-start space-x-3 group">
-              <i className="fa-brands fa-line text-accent text-xl mt-1 group-hover:rotate-12 transition-transform"></i>
+              <i className="fa-brands fa-line text-accent text-xl mt-1"></i>
               <div>
                 <p className="text-sm text-gray-400">Line ID</p>
-                <a href="https://line.me/ti/p/~kanathipcharoen" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors">kanathipcharoen</a>
+                <a href="https://line.me/ti/p/~kanathipcharoen" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors font-medium">kanathipcharoen</a>
               </div>
             </li>
             <li className="flex items-start space-x-3 group">
-              <i className="fa-solid fa-envelope text-accent mt-1 group-hover:-translate-y-1 transition-transform"></i>
-              <a href="mailto:info@jingjaisurvey.com" className="hover:text-accent transition-colors">info@jingjaisurvey.com</a>
+              <i className="fa-brands fa-facebook text-accent text-xl mt-1"></i>
+              <div>
+                <p className="text-sm text-gray-400">Facebook Page</p>
+                <a href="https://www.facebook.com/jingjaisurvey" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors font-medium">JINGJAI SURVEY</a>
+              </div>
             </li>
           </ul>
         </div>
 
         <div className="col-span-1">
-          <h3 className="text-xl font-bold mb-6">ที่ตั้งสำนักงาน</h3>
-          <div className="flex items-start space-x-3">
+          <h3 className="text-xl font-bold mb-6">ที่ตั้ง</h3>
+          <div className="flex items-start space-x-3 text-gray-400">
             <i className="fa-solid fa-location-dot text-accent mt-1"></i>
-            <p className="text-gray-400">
-              เลขที่ 160/18 ถนน พายัพทิศ 4 <br/>
-              ตำบลในเมือง อำเภอเมืองนนคราชสีมา<br/>
-              จังหวัดนครราชสีมา 30000
+            <p>
+              160/18 ถนน พายัพทิศ 4 ตำบลในเมือง<br/>
+              อำเภอเมืองนครราชสีมา จ.นครราชสีมา 30000
             </p>
           </div>
-          <div className="mt-4 pt-4 border-t border-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-2">
-             <a 
-              href="tel:0820025124" 
-              className="flex items-center justify-center bg-accent text-navy py-2 rounded-lg font-bold hover:bg-yellow-500 transition-colors text-sm"
-            >
+          <div className="mt-8 pt-6 border-t border-gray-800 grid grid-cols-2 gap-2">
+            <a href="tel:0820025124" className="bg-accent text-navy py-2 rounded font-bold text-center hover:bg-yellow-500 transition-colors text-sm">
               <i className="fa-solid fa-phone mr-1"></i> โทรเลย
-            </a>
-            <a 
-              href="https://line.me/ti/p/~kanathipcharoen" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center bg-green-500 text-white py-2 rounded-lg font-bold hover:bg-green-600 transition-colors text-sm"
-            >
-              <i className="fa-brands fa-line mr-1"></i> LINE
             </a>
             <a 
               href="https://www.facebook.com/jingjaisurvey" 
               target="_blank" 
-              rel="noopener noreferrer"
-              className="col-span-full flex items-center justify-center bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700 transition-all text-sm animate-pulse-slow shadow-lg hover:shadow-blue-500/20"
+              rel="noopener noreferrer" 
+              className="bg-blue-600 text-white py-2 rounded font-bold text-center hover:bg-blue-700 transition-colors text-sm shadow-blue-500/20 shadow-lg"
             >
-              <i className="fa-brands fa-facebook mr-2"></i> ติดตามเราบน Facebook
+              <i className="fa-brands fa-facebook mr-1"></i> Facebook
             </a>
           </div>
         </div>
@@ -580,24 +547,24 @@ const FloatingActionButton = () => (
       href="https://www.facebook.com/jingjaisurvey" 
       target="_blank" 
       rel="noopener noreferrer"
-      className="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all hover:rotate-6 group"
-      title="ติดตามเราบน Facebook"
+      className="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
+      title="ติดตามบน Facebook"
     >
-      <i className="fa-brands fa-facebook-f text-2xl group-hover:scale-125 transition-transform"></i>
+      <i className="fa-brands fa-facebook-f text-2xl"></i>
     </a>
     <a 
       href="https://line.me/ti/p/~kanathipcharoen" 
       target="_blank" 
       rel="noopener noreferrer"
-      className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce"
+      className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
       title="ติดต่อผ่าน LINE"
     >
       <i className="fa-brands fa-line text-3xl"></i>
     </a>
     <a 
       href="tel:0820025124" 
-      className="w-14 h-14 bg-accent text-navy rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all"
-      title="โทรสอบถาม"
+      className="w-14 h-14 bg-accent text-navy rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
+      title="โทรทันที"
     >
       <i className="fa-solid fa-phone text-2xl"></i>
     </a>
