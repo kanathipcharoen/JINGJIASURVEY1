@@ -8,6 +8,7 @@ interface Project {
   description: string;
   image: string;
   isVideo?: boolean;
+  videoUrl?: string; // URL for the video (YouTube, Drive, or direct MP4)
   gallery?: string[];
 }
 
@@ -31,19 +32,39 @@ interface FormErrors {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const offset = 80; // Navbar height
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <nav className="bg-navy text-white sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center">
-            <span className="text-2xl font-bold tracking-wider text-accent">JINGJAI <span className="text-white">SURVEY</span></span>
+            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-2xl font-bold tracking-wider text-accent cursor-pointer">
+              JINGJAI <span className="text-white">SURVEY</span>
+            </a>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a href="#services" className="hover:text-accent transition px-3 py-2 rounded-md font-medium">บริการของเรา</a>
-              <a href="#portfolio" className="hover:text-accent transition px-3 py-2 rounded-md font-medium">ผลงาน</a>
-              <a href="#quotation" className="hover:text-accent transition px-3 py-2 rounded-md font-medium">ขอใบเสนอราคา</a>
-              <a href="#contact" className="hover:text-accent transition px-3 py-2 rounded-md font-medium">ติดต่อเรา</a>
+              <a href="#services" onClick={(e) => handleScroll(e, 'services')} className="hover:text-accent transition px-3 py-2 rounded-md font-medium">บริการของเรา</a>
+              <a href="#portfolio" onClick={(e) => handleScroll(e, 'portfolio')} className="hover:text-accent transition px-3 py-2 rounded-md font-medium">ผลงาน</a>
+              <a href="#quotation" onClick={(e) => handleScroll(e, 'quotation')} className="hover:text-accent transition px-3 py-2 rounded-md font-medium">ขอใบเสนอราคา</a>
+              <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="hover:text-accent transition px-3 py-2 rounded-md font-medium">ติดต่อเรา</a>
             </div>
           </div>
           <div className="md:hidden">
@@ -62,10 +83,10 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-navy border-t border-gray-700">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#services" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">บริการของเรา</a>
-            <a href="#portfolio" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ผลงาน</a>
-            <a href="#quotation" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ขอใบเสนอราคา</a>
-            <a href="#contact" onClick={() => setIsOpen(false)} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ติดต่อเรา</a>
+            <a href="#services" onClick={(e) => handleScroll(e, 'services')} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">บริการของเรา</a>
+            <a href="#portfolio" onClick={(e) => handleScroll(e, 'portfolio')} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ผลงาน</a>
+            <a href="#quotation" onClick={(e) => handleScroll(e, 'quotation')} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ขอใบเสนอราคา</a>
+            <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="block hover:bg-gray-700 px-3 py-2 rounded-md font-medium">ติดต่อเรา</a>
           </div>
         </div>
       )}
@@ -73,42 +94,58 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => (
-  <header className="relative bg-navy py-24 md:py-32 overflow-hidden">
-    <div className="absolute inset-0 opacity-20">
-      <img 
-        src="https://images.unsplash.com/photo-1503387762-592dee58c460?auto=format&fit=crop&q=80&w=2000" 
-        alt="Engineering Background" 
-        className="w-full h-full object-cover"
-      />
-    </div>
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-      <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-        บริการสำรวจครบวงจร <br/>
-        <span className="text-accent">แม่นยำ รวดเร็ว โดยทีมงานมืออาชีพ</span>
-      </h1>
-      <p className="text-xl md:text-2xl mb-10 text-gray-300 max-w-3xl mx-auto">
-        รับวางผังเสาเข็ม, ทำแผนที่ Topographic Map, และงานสำรวจเพื่อการก่อสร้างทุกประเภท
-      </p>
-      <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <a 
-          href="https://line.me/ti/p/~kanathipcharoen" 
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-accent text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-yellow-500 transition-all transform hover:scale-105 shadow-xl flex items-center justify-center"
-        >
-          <i className="fa-brands fa-line text-2xl mr-2"></i> ปรึกษาฟรี (LINE)
-        </a>
-        <a 
-          href="tel:0820025124" 
-          className="bg-white text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-gray-100 transition-all border-2 border-transparent flex items-center justify-center shadow-lg"
-        >
-          <i className="fa-solid fa-phone mr-2"></i> 082-002-5124
-        </a>
+const Hero = () => {
+  const handleScrollToQuotation = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('quotation');
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <header className="relative bg-navy py-24 md:py-32 overflow-hidden">
+      <div className="absolute inset-0 opacity-20">
+        <img 
+          src="https://images.unsplash.com/photo-1503387762-592dee58c460?auto=format&fit=crop&q=80&w=2000" 
+          alt="Engineering Background" 
+          className="w-full h-full object-cover"
+        />
       </div>
-    </div>
-  </header>
-);
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+          บริการสำรวจครบวงจร <br/>
+          <span className="text-accent">แม่นยำ รวดเร็ว โดยทีมงานมืออาชีพ</span>
+        </h1>
+        <p className="text-xl md:text-2xl mb-10 text-gray-300 max-w-3xl mx-auto">
+          รับวางผังเสาเข็ม, ทำแผนที่ Topographic Map, และงานสำรวจเพื่อการก่อสร้างทุกประเภท
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <a 
+            href="https://line.me/ti/p/~kanathipcharoen" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-accent text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-yellow-500 transition-all transform hover:scale-105 shadow-xl flex items-center justify-center"
+          >
+            <i className="fa-brands fa-line text-2xl mr-2"></i> ปรึกษาฟรี (LINE)
+          </a>
+          <a 
+            href="#quotation" 
+            onClick={handleScrollToQuotation}
+            className="bg-white text-navy font-bold py-4 px-10 rounded-full text-lg hover:bg-gray-100 transition-all border-2 border-transparent flex items-center justify-center shadow-lg"
+          >
+            <i className="fa-solid fa-file-invoice-dollar mr-2"></i> ขอใบเสนอราคา
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+};
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -220,6 +257,14 @@ const Services = () => {
 const Portfolio = () => {
   const projects: Project[] = [
     {
+      id: 6,
+      title: "คุณกำลังจะสร้างบ้านใช่ไหม ",
+      description: "คุณกำลังจะสร้างบ้านใช่ไหม? ดูคลิปนี้ก่อน! ปัญหาหน้างานไม่ตรงแบบ วางผังผิด ทุบสร้างใหม่ ชมคำแนะนำเบื้องต้น",
+      image: "https://img5.pic.in.th/file/secure-sv1/Whisk_qdnygdm4m2m4ajy40sombdotqwy2qtl1ymzl1sm.png",
+      isVideo: true,
+      videoUrl: "https://drive.google.com/file/d/1n3l0TbF9gfFeGk677Vmml8IoX1JlA3bS/view?usp=sharing"
+    },
+    {
       id: 1,
       title: "วางผังอาคารคุมจ่าย ปั้มน้ำมัน PT",
       description: "งานวางผังอาคารคุมจ่าย ตรวจสอบพิกัดและระยะตามแบบวิศวกรรมอย่างละเอียด",
@@ -265,7 +310,7 @@ const Portfolio = () => {
     },
     {
       id: 4,
-      title: "วางผังอาคารบ้านพักอาศัย ซอย เอกอุดร 1 เมือง อำเภอเมืองปทุมธานี จังหวัดปทุมธานี",
+      title: "วางผังอาคารบ้านพักอาศัย จ.ปทุมธานี",
       description: "ทำหมุดควบคุมพร้อมครอบผังบริเวณบ้านพักอาศัยแล้ววางตำแหน่งเสาเข็ม",
       image: "https://img5.pic.in.th/file/secure-sv1/-1---Model_recover-Layout1.jpg",
       gallery:[
@@ -290,14 +335,35 @@ const Portfolio = () => {
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2 flex flex-col group"
             >
               <div className="h-64 overflow-hidden bg-gray-200 relative">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover cursor-pointer group-hover:scale-110 transition-transform duration-700" 
-                  onClick={() => window.open(project.image, '_blank')} 
-                />
+                {project.isVideo ? (
+                  <div 
+                    className="relative w-full h-full cursor-pointer"
+                    onClick={() => window.open(project.videoUrl, '_blank')}
+                  >
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover brightness-75 transition-transform duration-700 group-hover:scale-110" 
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-16 h-16 bg-accent text-navy rounded-full flex items-center justify-center shadow-xl animate-pulse">
+                        <i className="fa-solid fa-play text-2xl ml-1"></i>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover cursor-pointer group-hover:scale-110 transition-transform duration-700" 
+                    onClick={() => window.open(project.image, '_blank')} 
+                  />
+                )}
+                
                 <div className="absolute top-4 right-4">
-                  <span className="bg-navy bg-opacity-70 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md">Gallery</span>
+                  <span className={`${project.isVideo ? 'bg-accent text-navy' : 'bg-navy bg-opacity-70 text-white'} px-3 py-1 rounded-full text-xs font-bold shadow-md`}>
+                    {project.isVideo ? 'Video' : 'Gallery'}
+                  </span>
                 </div>
               </div>
               
@@ -305,7 +371,7 @@ const Portfolio = () => {
                 <h3 className="font-bold text-xl text-navy mb-3">{project.title}</h3>
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">{project.description}</p>
                 
-                {project.gallery && project.gallery.length > 0 && (
+                {!project.isVideo && project.gallery && project.gallery.length > 0 && (
                   <div className="mt-4 border-t pt-4">
                     <div className="grid grid-cols-3 gap-2">
                       {project.gallery.map((img, idx) => (
@@ -319,6 +385,15 @@ const Portfolio = () => {
                       ))}
                     </div>
                   </div>
+                )}
+
+                {project.isVideo && (
+                  <button 
+                    onClick={() => window.open(project.videoUrl, '_blank')}
+                    className="mt-4 w-full bg-navy text-white py-2 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all"
+                  >
+                    <i className="fa-solid fa-circle-play"></i> ดูก่อนสายเกินไป !
+                  </button>
                 )}
               </div>
             </div>
@@ -455,121 +530,125 @@ const QuotationForm = () => {
   );
 };
 
-const Footer = () => (
-  <footer id="contact" className="bg-navy text-white py-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-gray-700 pb-12 mb-12">
-        <div className="col-span-1">
-          <h2 className="text-3xl font-bold text-accent mb-4">JINGJAI SURVEY</h2>
-          <p className="text-gray-400 mb-6">
-            พันธมิตรที่ไว้วางใจได้ในงานสำรวจวิศวกรรม ด้วยอุปกรณ์ที่ทันสมัยและทีมงานคุณภาพ
-          </p>
-          <div className="flex space-x-4">
-            <a 
-              href="https://www.facebook.com/jingjaisurvey" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all shadow-blue-500/20 shadow-lg"
-              title="เยี่ยมชม Facebook"
-            >
-              <i className="fa-brands fa-facebook-f text-lg"></i>
-            </a>
-            <a 
-              href="https://line.me/ti/p/~kanathipcharoen" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-all shadow-green-500/20 shadow-lg"
-            >
-              <i className="fa-brands fa-line text-lg"></i>
-            </a>
+const Footer = () => {
+  return (
+    <footer id="contact" className="bg-navy text-white py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-gray-700 pb-12 mb-12">
+          <div className="col-span-1">
+            <h2 className="text-3xl font-bold text-accent mb-4">JINGJAI SURVEY</h2>
+            <p className="text-gray-400 mb-6">
+              พันธมิตรที่ไว้วางใจได้ในงานสำรวจวิศวกรรม ด้วยอุปกรณ์ที่ทันสมัยและทีมงานคุณภาพ
+            </p>
+            <div className="flex space-x-4">
+              <a 
+                href="https://www.facebook.com/jingjaisurvey" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-all shadow-blue-500/20 shadow-lg"
+                title="เยี่ยมชม Facebook"
+              >
+                <i className="fa-brands fa-facebook-f text-lg"></i>
+              </a>
+              <a 
+                href="https://line.me/ti/p/~kanathipcharoen" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-all shadow-green-500/20 shadow-lg"
+              >
+                <i className="fa-brands fa-line text-lg"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div className="col-span-1">
+            <h3 className="text-xl font-bold mb-6">ติดต่อเรา</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start space-x-3 group">
+                <i className="fa-solid fa-phone text-accent mt-1"></i>
+                <a href="tel:0820025124" className="text-xl font-semibold hover:text-accent transition-colors">082-002-5124</a>
+              </li>
+              <li className="flex items-start space-x-3 group">
+                <i className="fa-brands fa-line text-accent text-xl mt-1"></i>
+                <div>
+                  <p className="text-sm text-gray-400">Line ID</p>
+                  <a href="https://line.me/ti/p/~kanathipcharoen" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors font-medium">kanathipcharoen</a>
+                </div>
+              </li>
+              <li className="flex items-start space-x-3 group">
+                <i className="fa-brands fa-facebook text-accent text-xl mt-1"></i>
+                <div>
+                  <p className="text-sm text-gray-400">Facebook Page</p>
+                  <a href="https://www.facebook.com/jingjaisurvey" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors font-medium">JINGJAI SURVEY</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-span-1">
+            <h3 className="text-xl font-bold mb-6">ที่ตั้ง</h3>
+            <div className="flex items-start space-x-3 text-gray-400">
+              <i className="fa-solid fa-location-dot text-accent mt-1"></i>
+              <p>
+                160/18 ถนน พายัพทิศ 4 ตำบลในเมือง<br/>
+                อำเภอเมืองนครราชสีมา จ.นครราชสีมา 30000
+              </p>
+            </div>
+            <div className="mt-8 pt-6 border-t border-gray-800 grid grid-cols-2 gap-2">
+              <a href="tel:0820025124" className="bg-accent text-navy py-2 rounded font-bold text-center hover:bg-yellow-500 transition-colors text-sm">
+                <i className="fa-solid fa-phone mr-1"></i> โทรเลย
+              </a>
+              <a 
+                href="https://www.facebook.com/jingjaisurvey" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="bg-blue-600 text-white py-2 rounded font-bold text-center hover:bg-blue-700 transition-colors text-sm shadow-blue-500/20 shadow-lg"
+              >
+                <i className="fa-brands fa-facebook mr-1"></i> Facebook
+              </a>
+            </div>
           </div>
         </div>
         
-        <div className="col-span-1">
-          <h3 className="text-xl font-bold mb-6">ติดต่อเรา</h3>
-          <ul className="space-y-4">
-            <li className="flex items-start space-x-3 group">
-              <i className="fa-solid fa-phone text-accent mt-1"></i>
-              <a href="tel:0820025124" className="text-xl font-semibold hover:text-accent transition-colors">082-002-5124</a>
-            </li>
-            <li className="flex items-start space-x-3 group">
-              <i className="fa-brands fa-line text-accent text-xl mt-1"></i>
-              <div>
-                <p className="text-sm text-gray-400">Line ID</p>
-                <a href="https://line.me/ti/p/~kanathipcharoen" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors font-medium">kanathipcharoen</a>
-              </div>
-            </li>
-            <li className="flex items-start space-x-3 group">
-              <i className="fa-brands fa-facebook text-accent text-xl mt-1"></i>
-              <div>
-                <p className="text-sm text-gray-400">Facebook Page</p>
-                <a href="https://www.facebook.com/jingjaisurvey" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-accent transition-colors font-medium">JINGJAI SURVEY</a>
-              </div>
-            </li>
-          </ul>
+        <div className="text-center text-gray-500 text-sm">
+          <p>© {new Date().getFullYear()} JINGJAI SURVEY. All rights reserved.</p>
         </div>
+      </div>
+    </footer>
+  );
+};
 
-        <div className="col-span-1">
-          <h3 className="text-xl font-bold mb-6">ที่ตั้ง</h3>
-          <div className="flex items-start space-x-3 text-gray-400">
-            <i className="fa-solid fa-location-dot text-accent mt-1"></i>
-            <p>
-              160/18 ถนน พายัพทิศ 4 ตำบลในเมือง<br/>
-              อำเภอเมืองนครราชสีมา จ.นครราชสีมา 30000
-            </p>
-          </div>
-          <div className="mt-8 pt-6 border-t border-gray-800 grid grid-cols-2 gap-2">
-            <a href="tel:0820025124" className="bg-accent text-navy py-2 rounded font-bold text-center hover:bg-yellow-500 transition-colors text-sm">
-              <i className="fa-solid fa-phone mr-1"></i> โทรเลย
-            </a>
-            <a 
-              href="https://www.facebook.com/jingjaisurvey" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="bg-blue-600 text-white py-2 rounded font-bold text-center hover:bg-blue-700 transition-colors text-sm shadow-blue-500/20 shadow-lg"
-            >
-              <i className="fa-brands fa-facebook mr-1"></i> Facebook
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <div className="text-center text-gray-500 text-sm">
-        <p>© {new Date().getFullYear()} JINGJAI SURVEY. All rights reserved.</p>
-      </div>
+const FloatingActionButton = () => {
+  return (
+    <div className="fixed bottom-6 right-6 z-40 flex flex-col space-y-4">
+      <a 
+        href="https://www.facebook.com/jingjaisurvey" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
+        title="ติดตามบน Facebook"
+      >
+        <i className="fa-brands fa-facebook-f text-2xl"></i>
+      </a>
+      <a 
+        href="https://line.me/ti/p/~kanathipcharoen" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
+        title="ติดต่อผ่าน LINE"
+      >
+        <i className="fa-brands fa-line text-3xl"></i>
+      </a>
+      <a 
+        href="tel:0820025124" 
+        className="w-14 h-14 bg-accent text-navy rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
+        title="โทรทันที"
+      >
+        <i className="fa-solid fa-phone text-2xl"></i>
+      </a>
     </div>
-  </footer>
-);
-
-const FloatingActionButton = () => (
-  <div className="fixed bottom-6 right-6 z-40 flex flex-col space-y-4">
-    <a 
-      href="https://www.facebook.com/jingjaisurvey" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="w-14 h-14 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
-      title="ติดตามบน Facebook"
-    >
-      <i className="fa-brands fa-facebook-f text-2xl"></i>
-    </a>
-    <a 
-      href="https://line.me/ti/p/~kanathipcharoen" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
-      title="ติดต่อผ่าน LINE"
-    >
-      <i className="fa-brands fa-line text-3xl"></i>
-    </a>
-    <a 
-      href="tel:0820025124" 
-      className="w-14 h-14 bg-accent text-navy rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all animate-bounce-sync"
-      title="โทรทันที"
-    >
-      <i className="fa-solid fa-phone text-2xl"></i>
-    </a>
-  </div>
-);
+  );
+};
 
 const App: React.FC = () => {
   return (
